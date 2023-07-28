@@ -1,0 +1,13 @@
+server:
+  port: 8085
+spring:
+  application:
+    name: CONFIG-SERVER
+
+  cloud:
+    config:
+      server:
+        git:
+          uri: https://github.com/roshanbhure1999/microservice_POC
+          skip-ssl-validation: true
+          clone-on-start: true

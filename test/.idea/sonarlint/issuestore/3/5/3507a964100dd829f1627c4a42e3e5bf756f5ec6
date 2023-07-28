@@ -1,0 +1,8 @@
+
+b
+java:S1192*"GDefine a constant instead of duplicating this literal "roshan" 6 times.(Ã´Š‡øÿÿÿÿ
+k	java:S117"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(î¶Íýÿÿÿÿÿ
+h
+java:S6204"RReplace this usage of 'Stream.collect(Collectors.toList())' with 'Stream.toList()'(³öæ™
+g
+java:S6204"RReplace this usage of 'Stream.collect(Collectors.toList())' with 'Stream.toList()'(ê´™
