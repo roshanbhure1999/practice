@@ -22,6 +22,16 @@ spring:
     name: HOTEL-SERVICE
   config:
     import: optional:configserver:http://localhost:8085
+
+
+
+okta:
+  oauth2:
+    issuer: https://dev-04940289.okta.com/oauth2/default
+    audience: api://default
+
+
+
   kafka:
     consumer:
       group-id: tpd-loggers
@@ -29,12 +39,3 @@ spring:
     # change this property if you are using your own
     # Kafka cluster or your Docker IP is different
     bootstrap-servers: localhost:9092
-
-eureka:
-  instance:
-    prefer-ip-address: true
-  client:
-    fetch-registry: true
-    register-with-eureka: true
-    service-url:
-      defaultZone: http://localhost:8761/eureka

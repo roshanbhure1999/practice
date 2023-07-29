@@ -6,6 +6,7 @@ import com.hotel.Hotel.service.service.HotelService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -25,17 +26,20 @@ public class HotelController {
 
     private final HotelService hotelService;
     @PostMapping
+    @PreAuthorize("hasAuthority('Admin')")
     public ResponseEntity<Hotel> addCustomer( @RequestBody Hotel hotel) throws JsonProcessingException {
         return new ResponseEntity<>(hotelService.createHotel(hotel), HttpStatus.CREATED);
     }
 
     @GetMapping("/getById/{id}")
+    @PreAuthorize("hasAuthority('SCOPE_internal')")
     public ResponseEntity<Hotel> findCustomerById(@PathVariable Long id) {
         return ResponseEntity.ok(hotelService.getHotelById(id));
     }
 
 
     @GetMapping
+    @PreAuthorize("hasAuthority('SCOPE_internal') || hasAuthority('Admin')")
     public ResponseEntity<List<Hotel>> findAll() {
         return ResponseEntity.ok(hotelService.getAllHotel());
     }
