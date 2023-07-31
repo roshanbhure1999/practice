@@ -2,7 +2,6 @@ package com.user.service.controller;
 
 import com.user.service.dto.UserDto;
 import com.user.service.service.UserService;
-import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
 import io.github.resilience4j.ratelimiter.annotation.RateLimiter;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -49,11 +48,6 @@ public class UserController {
         return new ResponseEntity<>(user, HttpStatus.BAD_REQUEST);
     }
 
-
-    @PutMapping()
-    public ResponseEntity<String> updateUser(@RequestBody UserDto userDto) {
-        return new ResponseEntity<>(userService.updateUser(userDto), HttpStatus.CREATED);
-    }
 
     @GetMapping
     public ResponseEntity<List<UserDto>> findAll() {

@@ -9,7 +9,6 @@ public interface UserService {
 
     UserDto findById(Long id);
 
-    String updateUser(UserDto userDto);
 
     List<UserDto> findAll();
 

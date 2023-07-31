@@ -1,5 +1,6 @@
 package com.user.service.intercepter;
 
+import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpRequest;
@@ -10,11 +11,13 @@ import org.springframework.security.oauth2.client.OAuth2AuthorizeRequest;
 import org.springframework.security.oauth2.client.OAuth2AuthorizedClientManager;
 
 import java.io.IOException;
+
+
 public class RestTemplateInterceptor implements ClientHttpRequestInterceptor {
 
-    private OAuth2AuthorizedClientManager manager;
+    private final OAuth2AuthorizedClientManager manager;
 
-    private Logger logger= LoggerFactory.getLogger(RestTemplateInterceptor.class);
+    private final Logger logger= LoggerFactory.getLogger(RestTemplateInterceptor.class);
 
     public RestTemplateInterceptor(OAuth2AuthorizedClientManager manager) {
         this.manager = manager;

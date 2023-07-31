@@ -5,6 +5,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.oauth2.client.OAuth2AuthorizedClient;
 import org.springframework.security.oauth2.client.annotation.RegisteredOAuth2AuthorizedClient;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 
@@ -23,7 +25,7 @@ import java.util.stream.Collectors;
 public class AuthController {
 
 
-    private Logger logger = LoggerFactory.getLogger(AuthController.class);
+    private final Logger logger = LoggerFactory.getLogger(AuthController.class);
 
 
     @GetMapping("/login")
@@ -43,15 +45,16 @@ public class AuthController {
         authResponse.setUserId(user.getEmail());
 
         //setting toke to auth response
-        authResponse.setAccessToken(client.getAccessToken().getTokenValue());
+        if (Objects.nonNull(client.getAccessToken())) {
+            authResponse.setAccessToken(client.getAccessToken().getTokenValue());
 
-        authResponse.setRefreshToken(client.getRefreshToken().getTokenValue());
+            authResponse.setRefreshToken(Objects.requireNonNull(client.getRefreshToken()).getTokenValue());
 
-        authResponse.setExpireAt(client.getAccessToken().getExpiresAt().getEpochSecond());
+            authResponse.setExpireAt(Objects.requireNonNull(client.getAccessToken().getExpiresAt()).getEpochSecond());
 
-        List<String> authorities = user.getAuthorities().stream().map(grantedAuthority -> {
-            return grantedAuthority.getAuthority();
-        }).collect(Collectors.toList());
+        }
+
+        List<String> authorities = user.getAuthorities().stream().map(GrantedAuthority::getAuthority).collect(Collectors.toList());
 
 
         authResponse.setAuthorities(authorities);

@@ -1,6 +1,5 @@
 package com.user.service.dto;
 
-import com.user.service.entity.Rating;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -22,5 +21,5 @@ public class UserDto implements Serializable {
     private String name;
     private String email;
     private String about;
-    private List<Rating> ratings;
+    private List<Hotel.Rating> ratings;
 }

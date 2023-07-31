@@ -1,5 +1,6 @@
 package com.user.service.entity;
 
+import com.user.service.dto.Hotel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -28,5 +29,5 @@ public class User implements Serializable {
     @Column(name = "about")
     private String about;
     @Transient
-    private List<Rating> ratings = new ArrayList<>();
+    private List<Hotel.Rating> ratings = new ArrayList<>();
 }
