@@ -38,4 +38,14 @@ public class UserControllerTest extends AbstractTest {
 
 
     }
+
+    @Test
+    void deleteByIdTest() throws Exception {
+
+        Mockito.when(userService.deleteById(1)).thenReturn("user delete successfully");
+
+        prePerformCheck(DELETE, "/user/delete/1", null, null, null, MockMvcResultMatchers.status().isOk());
+
+
+    }
 }
